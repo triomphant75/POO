@@ -1,18 +1,28 @@
-<?php 
+<?php
 class Module{
     private int $id;
-    private string $libelle; 
+    private string $libelle;
+    //constructeur 
+    public function __contruct(){}
 
-    //OneToMany avec Cours
-    //Un Module associee a plusieurs cours
+
+    //les fonctions navigationnelless 
+    // one to many avec cours 
     public function cours():array{
         return [];
     }
-
-    //ManyToMany avec Professeurs
-    
+    //Many to many avec Professeurs
     public function professeurs():array{
-        return [];}
+        return [];
+    }
+
+    
+
+
+
+
+   
+
     /**
      * Get the value of id
      */ 

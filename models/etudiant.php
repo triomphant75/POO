@@ -1,47 +1,25 @@
-
-<?php 
-//class Etudiant extends User implements Imodel
-class Etudiant extends User {
+<?php
+class Etudiant extends User{
     //Attributs
-    private int $id;
+    private string $nomComplet;
     private string $matricule;
 
-    public function __construct(){}
-    /*{
-        $this->role="ROLE_Etudiants";
-    }
-    public function insert()
-    {
-        $sql="INSERT into etudiants(nomComplet,matricule) value({this->nomComplet},{this->matricule})";
-    }
-    public function update()
-    {
-        $sql="UPDATE  etudiants set nomComplet={this->nomComplet},matricule={this->matricule} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * form etudiants";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE form etudiants where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form etudiants where id={$id}";
-    }*/
-
-    // one to many avec Inscription
-    public function inscription():array{
+    //one to many avec Inscription donne un array  Ps: tous ce qui est tableau il y'a s a la fin  
+    public function inscriptions():array{
         return [];
     }
 
-    //OneToOne  avec Adresse
-    public function adresse():Adresse|null{
-        return null;
-    }
 
-    //Methodes
+    //Methodes 
+        //constructeurs
+    public function __construct(){ 
+        //On appelle le constructeur qui permet d'instancier les objects 
+    
+    }
+    
+
+    
+
     /**
      * Get the value of nomComplet
      */ 
@@ -81,27 +59,4 @@ class Etudiant extends User {
 
         return $this;
     }
- 
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 }
-
-?>

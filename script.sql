@@ -1,23 +1,30 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le :  jeu. 05 mai 2022 à 16:28
--- Version du serveur :  5.7.26
--- Version de PHP :  7.4.2
+-- Host: 127.0.0.1
+-- Generation Time: May 23, 2022 at 08:42 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de données :  `gestion_scolaire_l2`
+-- Database: `gestion_scolaire_l2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `classe`
+-- Table structure for table `classe`
 --
 
 CREATE TABLE `classe` (
@@ -25,12 +32,12 @@ CREATE TABLE `classe` (
   `libelle` varchar(20) NOT NULL,
   `filiere` varchar(20) NOT NULL,
   `niveau` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cours`
+-- Table structure for table `cours`
 --
 
 CREATE TABLE `cours` (
@@ -41,34 +48,34 @@ CREATE TABLE `cours` (
   `classe_id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
   `professeur_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `module`
+-- Table structure for table `module`
 --
 
 CREATE TABLE `module` (
   `id` int(11) NOT NULL,
-  `libelle` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `libelle` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `professeur_module`
+-- Table structure for table `professeur_module`
 --
 
 CREATE TABLE `professeur_module` (
   `module_id` int(11) NOT NULL,
   `professeur_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -79,116 +86,97 @@ CREATE TABLE `user` (
   `ville` varchar(100) DEFAULT NULL,
   `quartier` varchar(100) DEFAULT NULL,
   `role` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
-CREATE TABLE `inscription` (
-  `id_inscription` int(11) NOT NULL,
-  `date_ins` varchar(20) NOT NULL,
-  `etudiant_id` int(11) NOT NULL,
-  `classe_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `classe`
+-- Indexes for table `classe`
 --
 ALTER TABLE `classe`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `libelle` (`libelle`);
 
 --
--- Index pour la table `cours`
+-- Indexes for table `cours`
 --
 ALTER TABLE `cours`
   ADD PRIMARY KEY (`id`),
   ADD KEY `classe_id` (`classe_id`),
+  ADD KEY `module_id` (`module_id`),
   ADD KEY `professeur_id` (`professeur_id`),
-  ADD KEY `module_id` (`module_id`);
+  ADD KEY `module_id_2` (`module_id`);
 
 --
--- Index pour la table `module`
+-- Indexes for table `module`
 --
 ALTER TABLE `module`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `libelle` (`libelle`);
 
 --
--- Index pour la table `professeur_module`
+-- Indexes for table `professeur_module`
 --
 ALTER TABLE `professeur_module`
   ADD KEY `module_id` (`module_id`),
   ADD KEY `professeur_id` (`professeur_id`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `login` (`login`);
-
-
-
--- Index pour la table `inscription`
---
-ALTER TABLE `inscription`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `etudiant_id` (`classe_id`),
-  ADD KEY `date_ins` (`date_ins`),
-  ADD KEY `classe_id` (`classe_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `classe`
+-- AUTO_INCREMENT for table `classe`
 --
 ALTER TABLE `classe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `cours`
+-- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `module`
+-- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
-ALTER TABLE `inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `cours`
+-- Constraints for table `cours`
 --
 ALTER TABLE `cours`
   ADD CONSTRAINT `cours_ibfk_1` FOREIGN KEY (`classe_id`) REFERENCES `classe` (`id`),
   ADD CONSTRAINT `cours_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`),
   ADD CONSTRAINT `cours_ibfk_3` FOREIGN KEY (`professeur_id`) REFERENCES `user` (`id`);
 
--- Contraintes pour la table `inscription`
-ALTER TABLE `inscription`
-  ADD CONSTRAINT `inscription_ibfk_1` FOREIGN KEY (`etudiant_id`) REFERENCES `etudiant` (`id`),
-  ADD CONSTRAINT `inscription_ibfk_2` FOREIGN KEY (`classe_id`) REFERENCES `classe` (`id`),
-  
--- Contraintes pour la table `professeur_module`
+--
+-- Constraints for table `professeur_module`
 --
 ALTER TABLE `professeur_module`
   ADD CONSTRAINT `professeur_module_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`),
   ADD CONSTRAINT `professeur_module_ibfk_2` FOREIGN KEY (`professeur_id`) REFERENCES `user` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

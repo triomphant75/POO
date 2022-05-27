@@ -1,69 +1,36 @@
-
-<?php 
-
+<?php
 class Classe{
-    // Attributs
+    //Attributs instances 
     private int $id;
     private string $libelle;
-    private string $niveau;
     private string $filiere;
+    private string $niveau;
 
-    /*public function insert()
-    {
-        $sql="INSERT into classes(libelle) value({this->libelle})";
-    }
-    public function update()
-    {
-        $sql="UPDATE  classes set libelle={this->libelle} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * form classes";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE form classes where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form classes where id={$id}";
-    }*/
-    
-    // Attributs navigationnels
-    // one to many Cours  private $cours=[];
-    // Methodes
-    public function cours(): array{
-        //$sql="SELECT * form cours c where c.classe_id={$this->id}";
+
+    //fonctions  navigationnelles (fonction issues des associations )
+    //1-Attributs
+    //one to many avec cours donne un array 
+    // 2-par des methodes 
+    public function cours():array{
+        $sql=" select * from cours where c.classe_id={$this->id} ";
         return [];
     }
-    // one to many Incriptions
-    public function inscription(): array{
-      
+    //one to many avec Inscription donne un array  Ps: tous ce qui est tableau il y'a s a la fin  
+    public function inscriptions():array{
+        $sql=" select * from inscriptions i where i.classe_id={$this->id} ";
+
         return [];
     }
-    public function __construct() 
-    {
 
-    }
-    /**
-     * Get the value of libelle
-     */ 
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
 
-    /**
-     * Set the value of libelle
-     *
-     * @return  self
-     */ 
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
 
-        return $this; 
+    //Methodes 
+        //constructeurs
+    public function __construct(){ 
+        //On appelle le constructeur qui permet d'instancier les objects 
+    
     }
+  
 
     /**
      * Get the value of id
@@ -81,6 +48,26 @@ class Classe{
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of libelle
+     */ 
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set the value of libelle
+     *
+     * @return  self
+     */ 
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
 
         return $this;
     }

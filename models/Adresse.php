@@ -1,17 +1,19 @@
-<?php 
+<?php
 class Adresse{
     private int $id;
     private string $ville;
     private string $quartier;
+    
+//one to one avec Professeur 
+public function professeur():Professeur{
+    return new Professeur;
+}
+//one to one avec Etudiant 
+public function etudiant():Etudiant{
+    return new Etudiant;
+}
 
-    //OneToOne  avec Professeur
-    public function professeur():Professeur{
-        return new Professeur;
-    }
 
-    public function etudiant():Etudiant{
-        return new Etudiant;
-    }
     /**
      * Get the value of id
      */ 

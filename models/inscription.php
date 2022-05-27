@@ -1,49 +1,43 @@
 <?php
-//  class Inscription implement Imodel {}
-class Inscription {
-    private string $id;
-    private DateTime $dateIns;
+class Inscription implements IModel {
+    private int $id;
+    private DateTime $dateInscription;
     private string $annee;
 
-
-   /* public function insert()
-    {
-        $sql="INSERT into Inscription(dateIns,annee) value({this->dateIns},{this->annee})";
+    
+    public function insert(){
+        $sql="insert into inscriptions(date_inscription,annee) value ( {$this->dateInscription},{$this->annee})";
     }
-    public function update()
-    {
-        $sql="UPDATE  Inscription set dateIns={this->dateIns},annee={this->annee} where id={this->id}";
+    public function update(){
+        $sql="update  inscriptions set date_inscription={$this->dateInscription},annee={$this->annee} where id={$this->id}";
+    }
+    public static function selectAll(){
+        $spl= "select * from inscriptions";
+    }
+    public static function delete(int $id){
+        $sql="delete from inscriptions where id={$id}";
+    }
+    public static function selectByid(int $id){
+        $spl= "select * from inscriptions where id={$id}";
+    } 
+
+    //les attributs navigationnels 
+    //many to one avec classe 
+    public function classe():Classe{
+        $spl= "select c.* from inscriptions i,classes c where c.id=i.classe_id and i.id={$id}";
+        return new Classe();
+
+    }
+    //many to one avec Etudiant
+    public function etudiant():Etudiant{
+        $spl= "select e.* from inscriptions i,etudiants e where e.id=i.etudiant_id and i.id={$id}";
+        return new Etudiant();
     }
     
-    public static function selectAll()
-    {
-        $sql="SELECT * form inscription";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE form Inscriptionwhere id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form Inscription where id={$id}";
-    } */
+    public function __construct() {}
 
-    // many to one avec Classe
-    public function classe():Classe{
-        //$sql="SELECT c.* form Inscription i,classe c where c.id=i.classe_id and i.id={$this->id}";
-        return new Classe(); 
-    } 
-    // many to one avec Etudiant
-    public function etudiant():Etudiant{
-
-
-
-
-
-
-        //$sql="SELECT e.* form Inscription i,etudiant e where e.id=i.etudiant and  i.id={$this->id}";
-        return new Etudiant(); 
-    } 
-    /**     * Get the value of dateIns
+    /**
+     * Get the value of dateIns
      */ 
     public function getDateIns()
     {
@@ -81,27 +75,24 @@ class Inscription {
 
         return $this;
     }
-    
 
     /**
-     * Get the value of id
+     * Get the value of etudiant
      */ 
-    public function getId()
+    public function getEtudiant()
     {
-        return $this->id;
+        return $this->etudiant;
     }
 
     /**
-     * Set the value of id
+     * Set the value of etudiant
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setEtudiant($etudiant)
     {
-        $this->id = $id;
+        $this->etudiant = $etudiant;
 
         return $this;
     }
 }
-
-?>

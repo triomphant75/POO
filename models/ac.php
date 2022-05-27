@@ -1,24 +1,24 @@
 <?php
-//  class AC extends User implement Imodel {}
-class AC extends User{
- 
-//AP herite de User
+class Ac extends User{
+    //Attributs
+    private string $email;
 
-   
-    public function __construct()
-    {
-        $this->role="ROLE_AC";
+    //Methodes 
+        //constructeurs
+    public function __construct(){ 
+        //On appelle le constructeur qui permet d'instancier les objects 
+    
     }
-    //Redefinition => evolution
-      //1-Heritage de Methode
-      //2-Redefinir=> changer son comportement
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-       public function setRole($role)
-        {
-            return $this;
-        }
+
+
+
+    
+    //setters ou mutateurs  (on encapsule)
+    public function setEmail(string $email): void{
+        $this->email=$email;     
+    }
+    //getters (permet de d'obtenir la valeur d'un attribut priver ou public )
+    public function getEmail(): string{
+        return $this->email;
+    }
 }

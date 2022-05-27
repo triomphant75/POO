@@ -1,51 +1,39 @@
-<?php 
+<?php
 class Professeur  extends User{
+    //Attribut instances 
     private string $grade;
 
-  
-   /* public function insert()
-    {
-        $sql="INSERT into Professeurs (grade) value({this->grade}";
-    }
-    public function update()
-    {
-        $sql="UPDATE  Professeurrs set grade={this->grade} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * from Professeurs";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE from Professeurs where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form Professeurs where id={$id}";
-    } */
 
-  
-  
-    public function __construct()
-    {
-        $this->role="ROLE_PROFESSEUR";
-    }
-     //OneToMany avec Cours
-    //Une Professeur associee a plusieurs cours
+     //Methodes 
+        //constructeurs
+        public function __construct(){ 
+            //On appelle le constructeur qui permet d'instancier les objects 
+            $this->role="ROLE_PROFESSEUR";
+            //1-Redifiniton => evolution
+            //2-Redefenir c'est changer son comportement 
+        }
+
+        //one to many avec Cours donne un array  Ps: tous ce qui est tableau il y'a s a la fin  
     public function cours():array{
         return [];
     }
 
-    //ManyToMany avec Module
-    
-    public function modules():array{
+     //Many to many avec Modules
+     public function modules():array{
         return [];
     }
 
-    //OneToOne  avec Adresse
+    //one to one avec adresse 
     public function adresse():Adresse|null{
         return null;
     }
+
+
+
+    //Getters
+
+    
+
     /**
      * Get the value of grade
      */ 
@@ -53,6 +41,10 @@ class Professeur  extends User{
     {
         return $this->grade;
     }
+
+
+    //Setters 
+    
 
     /**
      * Set the value of grade
@@ -65,17 +57,15 @@ class Professeur  extends User{
 
         return $this;
     }
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
 
-    //Redefinition => evolution
-      //1-Heritage de Methode
-      //2-Redefinir=> changer son comportement
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-      public function setRole($role)
-      {
-          return $this;
-      }
+        return $this;
+    }
 }

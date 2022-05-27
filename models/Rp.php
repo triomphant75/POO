@@ -1,21 +1,29 @@
-<?php 
-//RP herite de User
-class RP extends User{
-   
-    public function __construct()
-    {
+<?php
+//RP hérite de User
+class Rp extends User{
+    //Attributs
+
+    
+
+    //Methodes 
+        //constructeurs
+    public function __construct(){ 
+        //On appelle le constructeur qui permet d'instancier les objects 
         $this->role="ROLE_RP";
+        //1-Redifiniton => evolution
+        //2-Redefenir c'est changer son comportement 
     }
-    //Redefinition => evolution
-      //1-Heritage de Methode
-      //2-Redefinir=> changer son comportement
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-       public function setRole($role)
-        {
-            return $this;
-        }
+
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+    
 }
