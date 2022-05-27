@@ -7,8 +7,11 @@ class Ac extends User{
         //constructeurs
     public function __construct(){ 
         //On appelle le constructeur qui permet d'instancier les objects 
-    
+        $this->role="ROLE_AC";
+        //1-Redifiniton => evolution
+        //2-Redefenir c'est changer son comportement 
     }
+
 
 
 
@@ -20,5 +23,16 @@ class Ac extends User{
     //getters (permet de d'obtenir la valeur d'un attribut priver ou public )
     public function getEmail(): string{
         return $this->email;
+    }
+     /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }
