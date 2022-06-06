@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 class Etudiant extends User{
     //Attributs
     private string $nomComplet;
@@ -6,9 +7,16 @@ class Etudiant extends User{
 
     //one to many avec Inscription donne un array  Ps: tous ce qui est tableau il y'a s a la fin  
     public function inscriptions():array{
+        $sql=" select u* from etudiant e,
+        inscriptions i where e.etudiant_id=e.id and i.id={$this->id} ";
         return [];
     }
-
+    //one to one avec Adresse donne un objet de type adresse
+    public function adresse():Adresse{
+        $sql=" select * from etudiant e,
+        adresse a where e.classe_id=e.id and e.id={$this->id} ";
+        return new Adresse;
+    }
 
     //Methodes 
         //constructeurs

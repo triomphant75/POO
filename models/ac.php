@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 class Ac extends User{
     //Attributs
     private string $email;

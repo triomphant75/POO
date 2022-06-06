@@ -1,15 +1,20 @@
 <?php
-class Adresse{
+namespace App\Models;
+class Adresse extends Model{
     private int $id;
     private string $ville;
     private string $quartier;
     
 //one to one avec Professeur 
 public function professeur():Professeur{
+    $sql=" select * from adresse a,
+        professeur p where a.professeur_id=p.id and p.id={$this->id} ";
     return new Professeur;
 }
 //one to one avec Etudiant 
 public function etudiant():Etudiant{
+    $sql=" select * from adresse a,
+        etudiant e where a.etudiant_id=e.id and e.id={$this->id} ";
     return new Etudiant;
 }
 

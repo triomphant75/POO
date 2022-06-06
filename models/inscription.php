@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 class Inscription implements IModel {
     private int $id;
     private DateTime $dateInscription;

@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 //RP hérite de User
 class Rp extends User{
     //Attributs

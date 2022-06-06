@@ -1,0 +1,17 @@
+{
+    "name": "ide_tora/poo",
+    "autoload": {
+        "psr-4": {
+            "App\\Models\\": "models/",
+            "App\\Core\\":"core/",
+            "App\\Controllers\\":"controllers/"
+        }
+    },
+    "authors": [
+        {
+            "name": "triomphant",
+            "email": "triomphant-albi.nzikou@ism.edu.sn"
+        }
+    ],
+    "require": {}
+}

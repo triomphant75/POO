@@ -1,29 +1,37 @@
 <?php
-class Cours{
+namespace App\Models;
+class Cours extends Model{
     private int $id;
-    private DateTime $dateCours;
+    private \DateTime $dateCours;
     private string $heureDebut;
     private string $heureFin;
 
     //fonctions navigationnelles
     // many to one avec classe
     public function classe():Classe{
+        $sql ="select * from cours c,
+        classe cl where c.classe_id=cl.id and c.id={$this->id}";
         return new Classe();
     }
 
     // many to one avec module
     public function module():Module{
+        $sql ="select * from cours c,
+         module m where c.module_id=m.id and c.id={$this->id}";
         return new Module();
     }
     // many to one avec Professeur 
     public function professeur():Professeur{
+        $sql ="select u.* from cours c,
+         user u where c.professeur_id=u.id and c.id={$this->id}
+         and role like 'ROLE_PROFESEEUR ";
         return new Professeur();
     }
 
 
     
     public function __construct(){
-        
+        self::$table="Cours";
     }
 
 

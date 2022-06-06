@@ -1,9 +1,14 @@
 <?php
+namespace App\Models;
+use App\Core\Model;
+
 //Classe Concrete ( signie lorsqu'elle est instanciable)
 //Classe Astraite (elle ne produit pas d'objet )
 //Classe final (elle ne produit pas de classe, "on ne peut pas redéfinir les méthodes" )
-abstract class User  {
+class User extends Model {
+    
     //Attributs Instances (attribut qui est spécifique a chaque objet  )
+    //protected veut dire que les attribut sont accessibles au niveau des classes filles mais aussi au niveau de la classe mère
     protected int $id;
     protected string $login;
     protected string $password;
@@ -14,7 +19,7 @@ abstract class User  {
     //Methodes
     //construteur (il est appelé quand on veut creer un objet " Methodes qui permet de creer les objet")
     public function __contruct(){
-        
+        self::$table="user";
     }
 
     

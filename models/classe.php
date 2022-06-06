@@ -1,5 +1,7 @@
 <?php
-class Classe{
+namespace App\Models;
+use  App\Core\Model;
+class Classe extends Model {
     //Attributs instances 
     private int $id;
     private string $libelle;
@@ -12,12 +14,14 @@ class Classe{
     //one to many avec cours donne un array 
     // 2-par des methodes 
     public function cours():array{
-        $sql=" select * from cours where c.classe_id={$this->id} ";
+        $sql=" select * from cours c,
+        classe cl where c.classe_id=cl.id and cl.id={$this->id} ";
         return [];
     }
     //one to many avec Inscription donne un array  Ps: tous ce qui est tableau il y'a s a la fin  
     public function inscriptions():array{
-        $sql=" select * from inscriptions i where i.classe_id={$this->id} ";
+        $sql=" select * from inscriptions i,
+        classe cl where i.classe_id=cl.id and cl.id={$this->id} ";
 
         return [];
     }
@@ -29,6 +33,7 @@ class Classe{
     public function __construct(){ 
         //On appelle le constructeur qui permet d'instancier les objects 
     
+        self::$table="classe";
     }
   
 
